@@ -1,0 +1,150 @@
+$(document).ready(function() {
+    
+    $("#ziekte-expand").hide();
+    $("#roken-expand").hide();
+    $(".molaar-expand").hide();
+
+    $(".ziekte").change(function() {
+        var value = $(this).val();
+        if (value == "ja") {
+            $( "#ziekte-expand" ).show(400);
+        }
+        else if (value == "nee") {
+            $( "#ziekte-expand" ).hide(400);
+        }
+    })
+
+    $(".roken").change(function() {
+        var value = $(this).val();
+        if (value == "ja") {
+            $( "#roken-expand" ).show(400);
+        }
+        else if (value == "nee") {
+            $( "#roken-expand" ).hide(400);
+        }
+    })
+
+    $(".botverlies").change(function() {
+        var value = $(this).val();
+        if (value == "nee") {
+            $( ".molaar-expand" ).show(400);
+        }
+        else if (value == "ja") {
+            $( ".molaar-expand" ).hide(400);
+        }
+    })
+
+    $("#button").click(function() {
+        var sentence = buildSentence();
+        $("#result-sentence").html(sentence);
+    })
+      
+});
+
+
+function buildSentence() {
+    var sentence = "Een "
+    sentence = sentence.concat($("#leeftijd-input").val(), "-jarige ");
+
+    if ($("input[name='geslacht']:checked").val() == "M") {
+        sentence = sentence.concat("man ");
+    }
+    else if ($("input[name='geslacht']:checked").val() == "V") {
+        sentence = sentence.concat("vrouw ");
+    }
+
+    sentence = sentence.concat("met ");
+
+    sentence = sentence.concat(calculateParodont());
+
+    sentence = sentence.concat("parodontitis stadium ");
+
+    sentence = sentence.concat(calculateStage());
+
+    sentence = sentence.concat(calculateProgression());
+
+    if ($("input[name='suikerziekte']:checked").val() == "ja") {
+        sentence = sentence.concat("met suikerziekte ")
+    }
+
+    if ($("#roken-expand").is(":visible")) {
+        if ($("input[name='roken-expand']:checked").val() == "less") {
+            sentence = sentence.concat("rookt < 10 sig/dag")
+        }
+        else {
+            sentence = sentence.concat("rookt ≥ 10 sig/dag")
+        }
+    }
+
+    console.log(sentence)
+    return sentence
+}
+
+function calculateParodont() {
+    if ($("input[name='botverlies']:checked").val() == "ja") {
+        return "molaar/incisief "
+    }
+    else if ($("input[name='botverlies']:checked").val() == "nee") {
+        var elements = $("#gebitselementen-input").val();
+        var botverliesElements = $("#botverlies-elementen-input").val();
+
+        if ((parseInt(botverliesElements, 10) / (parseInt(elements, 10))) < (1/3)) {
+            return "lokale "
+        }
+        else {
+            return "gegeneraliseerde "
+        }
+    }
+
+}
+
+function calculateStage() {
+    if (parseInt($("#verloren-input").val()) >= 5 && 
+        ($("input[name='mobiliteit']:checked").val() == "ja" ||
+         parseInt($("#gebitselementen-input").val()) < 20)) {
+        return "IV "
+    }
+    else if ((parseInt($("#verloren-input").val())) >= 1) {
+        return "III "
+    }
+    else if ($("input[name='wortellengte']:checked").val() == "less") {
+        if ($("input[name='pocket']:checked").val() == "ja" ||
+            $("input[name='angulair']:checked").val() == "ja" ||
+            $("input[name='furcatie']:checked").val() == "ja") {
+            return "III "
+        }
+        else {
+            return "II "
+        }
+    }
+    else if ($("input[name='mobiliteit']:checked").val() == "nee") {
+        return "III "
+    }
+    else {
+        return "II "
+    }
+}
+
+
+
+function calculateProgression() {
+    if ($("input[name='botverlies']:checked").val() == "ja" ||
+        $("input[name='roken-expand']:checked").val() == "more" ||
+        $("input[name='suikerziekte']:checked").val() == "ja") {
+        return "graad C "
+    }
+
+    var percentage = parseInt($("#botverlies-percentage-input").val());
+    var age = parseInt($("#leeftijd-input").val());
+    var value = percentage / age;
+
+    if (value < 0.25) {
+        return "graad A "
+    }
+    else if (value >= 0.25 && value <= 1) {
+        return "graad B "
+    }
+    else if (value >1) {
+        return "graad C "
+    }
+}

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="utf-8">
+    <title>Patient parodontologie</title>
+
+    <!-- <script src="{{ url_for('static',filename='form.js') }}"></script> -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+
+    <script type='text/javascript' src='form.js'></script>
+</head>
+
+<body>
+    <div>
+        <label for="leeftijd">Leeftijd</label>
+        <form action="" id="leeftijd">
+            <input id="leeftijd-input" type="text" name="leeftijd" maxlength="3">
+        </form>
+    </div>
+    <div>
+        <label for="geslacht">Geslacht</label>
+        <form action="" id="geslacht">
+            <input type="radio" name="geslacht" value="M">M
+            <input type="radio" name="geslacht" value="V">V<br>  
+        </form>
+    </div>
+    <div>
+        <label for="ziekte">Zeldzame ziekte/syndroom</label>   
+        <form action="" id="ziekte">
+            <input class="ziekte" type="radio" name="ziekte" value="ja">ja
+            <input class="ziekte" type="radio" name="ziekte" value="nee">nee<br>   
+        </form>
+    </div>
+    <div id="ziekte-expand">
+        <label for="ziekte-expand-form">Kies ziekte(s):<br></label>   
+        <form action="" id="ziekte-expand-form">
+            <input class="ziekte-expand" type="checkbox" name="ziekte" value="papillon">Papillon Lefevre<br>
+            <input class="ziekte-expand" type="checkbox" name="ziekte" value="kostmann">Kostmann syndroom<br>   
+            <input class="ziekte-expand" type="checkbox" name="ziekte" value="lad">LAD syndroom<br>
+            <input class="ziekte-expand" type="checkbox" name="ziekte" value="anders">Andere ziekte/syndroom<br>
+        </form>
+    </div>
+    <div>
+        <label for="suikerziekte">Suikerziekte</label>
+        <form action="" id="suikerziekte">
+            <input class="suikerziekte" type="radio" name="suikerziekte" value="ja">ja
+            <input class="suikerziekte" type="radio" name="suikerziekte" value="nee">nee<br> 
+        </form>
+    </div>
+    <div>
+        <label for="roken">Roken</label>
+        <form action="" id="roken">
+            <input class="roken" type="radio" name="roken" value="ja">ja
+            <input class="roken" type="radio" name="roken" value="nee">nee<br> 
+        </form>
+    </div>
+    <div id="roken-expand">
+        <label for="roken-expand-form">Aantal sigaretten per dag</label>
+        <form action="" id="roken-expand-form">
+            <input class="roken-expand" type="radio" name="roken-expand" value="less">&#60;10
+            <input class="roken-expand" type="radio" name="roken-expand" value="more">&#8805;10<br> 
+        </form>
+    </div>
+    <div>
+        <label for="dpsi">DPSI categorie</label>
+        <form action="" id="dpsi">
+            <input class="dpsi" type="radio" name="dpsi" value="a">A
+            <input class="dpsi" type="radio" name="dpsi" value="b">B 
+            <input class="dpsi" type="radio" name="dpsi" value="b">C<br> 
+        </form>
+    </div>
+    <div>
+        <label for="verloren">Hoeveel gebitselementen zijn verloren gegaan door parodontitis?</label>
+        <form action="" id="verloren">
+            <input id="verloren-input" type="text" name="verloren" maxlength="2">
+        </form>
+    </div>
+
+
+
+    <div>
+        <label for="gebitselementen">Aantal gebitselementen (1-32)</label>
+        <form action="" id="gebitselementen">
+            <input id="gebitselementen-input" type="text" name="gebitselementen" maxlength="2">
+        </form>
+    </div>
+    <div>
+        <label for="botverlies">Botverlies heeft molaar/incisief patroon</label>
+        <form action="" id="botverlies">
+            <input class="botverlies" type="radio" name="botverlies" value="ja">ja
+            <input class="botverlies" type="radio" name="botverlies" value="nee">nee<br> 
+        </form>
+    </div>
+    <div class="molaar-expand">
+        <label for="botverlies-elementen">Hoeveel elementen hebben botverlies</label>
+        <form action="" id="botverlies-elementen">
+            <input id="botverlies-elementen-input" type="text" name="botverlies-elementen" maxlength="2">
+        </form>
+    </div>
+    <div class="molaar-expand">
+        <label for="element">Welk element heeft het meeste botverlies</label>
+        <form action="" id="element">
+            <input type="text" name="element">
+        </form>
+    </div>
+    <div class="molaar-expand">
+        <label for="mes-dist">Het meeste approximale botverlies zit aan</label>
+        <form action="" id="mes-dist">
+            <input type="radio" name="mes-dist" value="mes">mes
+            <input type="radio" name="mes-dist" value="dist">dist<br> 
+        </form>
+    </div>
+    <div class="molaar-expand">
+        <label for="botverlies-percentage">Maak een inschatting van de hoeveelheid botverlies (in procenten)</label>
+        <form action="" id="botverlies-percentage">
+                <input id="botverlies-percentage-input" type="text" name="botverlies-percentage" maxlength="2">%
+        </form>
+    </div>
+    <div class="molaar-expand">
+        <label for="wortellengte">Het botverlies reikt t.o.v. de totale wortellengte</label>
+        <form action="" id="wortellengte">
+            <input class="wortellengte" type="radio" name="wortellengte" value="less">&#60;1/3
+            <input class="wortellengte" type="radio" name="wortellengte" value="more">&#8805;1/3<br> 
+        </form>
+    </div>
+    <div class="molaar-expand">
+        <label for="angulair">Op de rontgenfoto's zijn angulaire defecten zichtbaar</label>
+        <form action="" id="angulair">
+            <input type="radio" name="botverlies" value="ja">ja
+            <input type="radio" name="botverlies" value="nee">nee<br> 
+        </form>
+    </div>
+    <div class="molaar-expand">
+        <label for="pocket">In de mond zijn 1 of meer plekken met een pocket van &#8805; 6mm</label>
+        <form action="" id="pocket">
+            <input type="radio" name="pocket" value="ja">ja
+            <input type="radio" name="pocket" value="nee">nee<br> 
+        </form>
+    </div>
+    <div class="molaar-expand">
+        <label for="furcatie">Ergens in de mond is er een furcatie graad 2 of 3</label>
+        <form action="" id="furcatie">
+            <input type="radio" name="furcatie" value="ja">ja
+            <input type="radio" name="furcatie" value="nee">nee<br> 
+        </form>
+    </div>
+    <div class="molaar-expand">
+        <label for="mobiliteit">Ergens in de mond is er een element met mobiliteit 2</label>
+        <form action="" id="mobiliteit">
+            <input type="radio" name="mobiliteit" value="ja">ja
+            <input type="radio" name="mobiliteit" value="nee">nee<br> 
+        </form>
+    </div>
+    <div id="button-div">
+        <br>
+        <button id="button" type="button">Paroclassificatie</button>
+    </div>
+    <div id="result">
+        <p id="result-sentence"></p>
+    </div>
+</body>
