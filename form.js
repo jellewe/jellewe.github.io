@@ -2,7 +2,8 @@ $(document).ready(function() {
     
     $("#ziekte-expand").hide();
     $("#roken-expand").hide();
-    $(".molaar-expand").hide();
+    $("#tab1").hide();
+    $("#tab2").hide();
 
     $(".ziekte").change(function() {
         var value = $(this).val();
@@ -24,17 +25,17 @@ $(document).ready(function() {
         }
     })
 
-    $(".botverlies").change(function() {
-        var value = $(this).val();
-        if (value == "nee") {
-            $( ".molaar-expand" ).show(400);
-        }
-        else if (value == "ja") {
-            $( ".molaar-expand" ).hide(400);
-        }
-    })
+    // $(".botverlies").change(function() {
+    //     var value = $(this).val();
+        // if (value == "nee") {
+        //     $( ".molaar-expand" ).show(400);
+        // }
+        // else if (value == "ja") {
+        //     $( ".molaar-expand" ).hide(400);
+        // }
+    // })
 
-    $("#button").click(function() {
+    $("#paro-button").click(function() {
         var isFilledOut = checkIfFilledOut();
         if (isFilledOut == "correct") {
             var sentence = buildSentence();
@@ -43,6 +44,22 @@ $(document).ready(function() {
         else {
             $("#result-sentence").html("Fout: " + isFilledOut);
         }
+    })
+    $("#next-tab0").click(function() {
+        $("#tab0").hide();
+        $("#tab1").show();
+    })
+    $("#next-tab1").click(function() {
+        $("#tab1").hide();
+        $("#tab2").show();
+    })
+    $("#prev-tab1").click(function() {
+        $("#tab1").hide();
+        $("#tab0").show();
+    })
+    $("#prev-tab2").click(function() {
+        $("#tab2").hide();
+        $("#tab1").show();
     })
       
 });
@@ -94,7 +111,7 @@ function calculateParodont() {
         var elements = $("#gebitselementen-input").val();
         var botverliesElements = $("#botverlies-elementen-input").val();
 
-        if ((parseInt(botverliesElements, 10) / (parseInt(elements, 10))) < (1/3)) {
+        if ((parseInt(botverliesElements, 10) / (parseInt(elements, 10))) < 0.3) {
             return "lokale "
         }
         else {
@@ -158,7 +175,7 @@ function calculateProgression() {
 // Checks whether form is correctly filled out. Returns error message or 
 // "correct" if filled out correctly.
 function checkIfFilledOut() {
-    if (isNaN($("#leeftijd-input").val())) {
+    if (isNaN($("#leeftijd-input").val()) || $("#leeftijd-input").val() == "") {
         return "geef een getal als leeftijd op"
     }
     else if (!$("input[name='geslacht']:checked").val()) {
