@@ -25,3 +25,8 @@ body {
     border-radius: 50%;
     display: inline-block;
   }
+
+  .description {
+      font-size: 20px;
+      text-align: center;
+  }
