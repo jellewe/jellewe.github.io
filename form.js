@@ -35,8 +35,14 @@ $(document).ready(function() {
     })
 
     $("#button").click(function() {
-        var sentence = buildSentence();
-        $("#result-sentence").html(sentence);
+        var isFilledOut = checkIfFilledOut();
+        if (isFilledOut == "correct") {
+            var sentence = buildSentence();
+            $("#result-sentence").html(sentence);
+        }
+        else {
+            $("#result-sentence").html("Fout: " + isFilledOut);
+        }
     })
       
 });
@@ -146,5 +152,26 @@ function calculateProgression() {
     }
     else if (value >1) {
         return "graad C "
+    }
+}
+
+// Checks whether form is correctly filled out. Returns error message or 
+// "correct" if filled out correctly.
+function checkIfFilledOut() {
+    if (isNaN($("#leeftijd-input").val())) {
+        return "geef een getal als leeftijd op"
+    }
+    else if (!$("input[name='geslacht']:checked").val()) {
+        return "geef een geslacht op"
+    }
+    else if (!$("input[name='ziekte']:checked").val()) {
+        return "geef aan of persoon zeldzame ziekte/syndroom heeft"
+    }
+    else if ($("input[name='ziekte']:checked").val() == "ja" &&
+             !$("input[name='ziekte-expand']:checked").val()) {
+        return "geef aan welke zeldzame ziekte/syndroom persoon heeft"
+    }
+    else {
+        return "correct"
     }
 }
