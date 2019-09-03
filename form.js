@@ -5,6 +5,9 @@ $(document).ready(function() {
     $("#tab1").hide();
     $("#tab2").hide();
 
+    $(".step").css("opacity", "0.3")
+    $("#step0").css("opacity", "1")
+
     $(".ziekte").change(function() {
         var value = $(this).val();
         if (value == "ja") {
@@ -46,18 +49,28 @@ $(document).ready(function() {
         }
     })
     $("#next-tab0").click(function() {
+        $("#step0").css("opacity", "0.3")
+        $("#step1").css("opacity", "1")
+
         $("#tab0").hide();
         $("#tab1").show();
     })
     $("#next-tab1").click(function() {
+
+        $("#step1").css("opacity", "0.3")
+        $("#step2").css("opacity", "1")
         $("#tab1").hide();
         $("#tab2").show();
     })
     $("#prev-tab1").click(function() {
+        $("#step1").css("opacity", "0.3")
+        $("#step0").css("opacity", "1")
         $("#tab1").hide();
         $("#tab0").show();
     })
     $("#prev-tab2").click(function() {
+        $("#step2").css("opacity", "0.3")
+        $("#step1").css("opacity", "1")
         $("#tab2").hide();
         $("#tab1").show();
     })
