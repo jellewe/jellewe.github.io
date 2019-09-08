@@ -28,52 +28,20 @@ $(document).ready(function() {
         }
     })
 
-    // $(".botverlies").change(function() {
-    //     var value = $(this).val();
-        // if (value == "nee") {
-        //     $( ".molaar-expand" ).show(400);
-        // }
-        // else if (value == "ja") {
-        //     $( ".molaar-expand" ).hide(400);
-        // }
-    // })
-
     $("#paro-button").click(function() {
-        var isFilledOut = checkIfFilledOut();
-        if (isFilledOut == "correct") {
+        // var isFilledOut = checkIfFilledOut();
+        // if (isFilledOut == "correct") {
             var sentence = buildSentence();
             $("#result-sentence").html(sentence);
-        }
-        else {
-            $("#result-sentence").html("Fout: " + isFilledOut);
-        }
+        // }
+        // else {
+            // $("#result-sentence").html("Fout: " + isFilledOut);
+        // }
     })
-    $("#next-tab0").click(function() {
-        $("#step0").css("opacity", "0.3")
-        $("#step1").css("opacity", "1")
 
-        $("#tab0").hide();
-        $("#tab1").show();
-    })
-    $("#next-tab1").click(function() {
+    nextPrev();
 
-        $("#step1").css("opacity", "0.3")
-        $("#step2").css("opacity", "1")
-        $("#tab1").hide();
-        $("#tab2").show();
-    })
-    $("#prev-tab1").click(function() {
-        $("#step1").css("opacity", "0.3")
-        $("#step0").css("opacity", "1")
-        $("#tab1").hide();
-        $("#tab0").show();
-    })
-    $("#prev-tab2").click(function() {
-        $("#step2").css("opacity", "0.3")
-        $("#step1").css("opacity", "1")
-        $("#tab2").hide();
-        $("#tab1").show();
-    })
+
       
 });
 
@@ -185,23 +153,83 @@ function calculateProgression() {
     }
 }
 
-// Checks whether form is correctly filled out. Returns error message or 
-// "correct" if filled out correctly.
-function checkIfFilledOut() {
+// Checks whether form on first page is correctly filled out. Returns false 
+// if unsuccessful or true if filled out correctly.
+function checkIfFilledOutP0() {
     if (isNaN($("#leeftijd-input").val()) || $("#leeftijd-input").val() == "") {
-        return "geef een getal als leeftijd op"
+        $("#result-sentence").html("Fout: geef een getal als leeftijd op");
+        return false
     }
     else if (!$("input[name='geslacht']:checked").val()) {
-        return "geef een geslacht op"
+        $("#result-sentence").html("Fout: geef een geslacht op");
+        return false
     }
     else if (!$("input[name='ziekte']:checked").val()) {
-        return "geef aan of persoon zeldzame ziekte/syndroom heeft"
+        $("#result-sentence").html("Fout: geef aan of persoon zeldzame ziekte/syndroom heeft");
+        return false
     }
     else if ($("input[name='ziekte']:checked").val() == "ja" &&
+
              !$("input[name='ziekte-expand']:checked").val()) {
-        return "geef aan welke zeldzame ziekte/syndroom persoon heeft"
+        $("#result-sentence").html("Fout: geef aan welke zeldzame ziekte/syndroom persoon heeft");
+        return false
+    }
+    else if (!$("input[name='dpsi']:checked").val()) {
+        $("#result-sentence").html("Fout: geef een DSPI-categorie op");
+        return false
     }
     else {
-        return "correct"
+        return true
     }
+}
+// function checkIfFilledOutP1() {
+//     if (isNaN($("#leeftijd-input").val()) || $("#leeftijd-input").val() == "") {
+//         return "geef een getal als leeftijd op"
+//     }
+//     else if (!$("input[name='geslacht']:checked").val()) {
+//         return "geef een geslacht op"
+//     }
+//     else if (!$("input[name='ziekte']:checked").val()) {
+//         return "geef aan of persoon zeldzame ziekte/syndroom heeft"
+//     }
+//     else if ($("input[name='ziekte']:checked").val() == "ja" &&
+//              !$("input[name='ziekte-expand']:checked").val()) {
+//         return "geef aan welke zeldzame ziekte/syndroom persoon heeft"
+//     }
+//     else {
+//         return "correct"
+//     }
+// }
+
+// Make next and previous buttons work
+function nextPrev() {
+    // Show steps on bottom of page properly, and show the correct page
+    $("#next-tab0").click(function() {
+        if (checkIfFilledOutP0()) {
+            $("#step0").css("opacity", "0.3");
+            $("#step1").css("opacity", "1");
+            $("#tab0").hide();
+            $("#tab1").show();
+            $("#result-sentence").html("");
+        }
+    })
+    $("#next-tab1").click(function() {
+        $("#step1").css("opacity", "0.3");
+        $("#step2").css("opacity", "1");
+        $("#tab1").hide();
+        $("#tab2").show();
+    })
+    $("#prev-tab1").click(function() {
+        $("#step1").css("opacity", "0.3");
+        $("#step0").css("opacity", "1");
+        $("#tab1").hide();
+        $("#tab0").show();
+    })
+    $("#prev-tab2").click(function() {
+        $("#step2").css("opacity", "0.3");
+        $("#step1").css("opacity", "1");
+        $("#tab2").hide();
+        $("#tab1").show();
+        $("#result-sentence").html("");
+    })
 }
